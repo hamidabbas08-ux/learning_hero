@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_spacing.dart';
+import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/safe_screen.dart';
 import '../../shared/widgets/section_title.dart';
-import '../../shared/widgets/app_card.dart';
-import '../../core/constants/app_spacing.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
         children: const [
           SectionTitle(
             title: 'Learning Hero',
-            subtitle: 'Choose a learning category',
+            subtitle: 'Choose your learning path',
           ),
 
           SizedBox(height: AppSpacing.sectionGap),
@@ -23,9 +23,47 @@ class HomeScreen extends StatelessWidget {
           AppCard(
             child: Padding(
               padding: EdgeInsets.all(20),
-              child: Text(
-                'Categories will appear here.',
-                style: TextStyle(fontSize: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Java',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    '0 / 100 Lessons Completed',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          SizedBox(height: 20),
+
+          AppCard(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Flutter',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Coming Soon',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
               ),
             ),
           ),
