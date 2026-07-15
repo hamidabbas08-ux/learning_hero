@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/java_lessons.dart';
+import 'lesson_screen.dart';
 
 class LessonListScreen extends StatelessWidget {
   const LessonListScreen({super.key});
@@ -16,16 +17,28 @@ class LessonListScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final lesson = javaLessons[index];
 
-          return ListTile(
-            leading: CircleAvatar(
-              child: Text('${lesson.id}'),
+          return Card(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
             ),
-            title: Text(lesson.title),
-            subtitle: Text(lesson.description),
-            trailing: const Icon(Icons.arrow_forward_ios),
-            onTap: () {
-              // اگلے مرحلے میں Lesson Screen کھلے گی۔
-            },
+            child: ListTile(
+              leading: CircleAvatar(
+                child: Text('${index + 1}'),
+              ),
+              title: Text(lesson.title),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => LessonScreen(
+                      lesson: lesson,
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
