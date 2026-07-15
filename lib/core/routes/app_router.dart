@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../features/splash/splash_screen.dart';
 import '../../features/home/home_screen.dart';
+import '../../features/splash/splash_screen.dart';
+import '../../features/welcome/welcome_screen.dart';
 import 'app_routes.dart';
 
 abstract final class AppRouter {
@@ -12,6 +13,11 @@ abstract final class AppRouter {
       case AppRoutes.home:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
+        );
+
+      case '/welcome':
+        return MaterialPageRoute(
+          builder: (_) => const WelcomeScreen(),
         );
 
       case AppRoutes.splash:
