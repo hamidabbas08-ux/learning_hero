@@ -19,7 +19,7 @@ class LessonScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Text(
-          lesson.content,
+          lesson.description,
           style: const TextStyle(
             fontSize: 18,
             height: 1.7,
