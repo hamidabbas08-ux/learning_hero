@@ -12,37 +12,19 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    );
-
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutBack,
-    );
-
-    _controller.forward();
-
     Timer(const Duration(seconds: 3), () {
-      if (!mounted) return;
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
+      if (mounted) {
+        Navigator.pushReplacementNamed(
+          context,
+          '/welcome',
+        );
+      }
     });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -50,35 +32,32 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: Center(
-        child: ScaleTransition(
-          scale: _animation,
-          child: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.school_rounded,
-                size: 120,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(
+              Icons.school_rounded,
+              size: 120,
+              color: Colors.white,
+            ),
+            SizedBox(height: 24),
+            Text(
+              'Learning Hero',
+              style: TextStyle(
                 color: Colors.white,
+                fontSize: 34,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 24),
-              Text(
-                'Learning Hero',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 34,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Learn • Play • Grow',
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 18,
               ),
-              SizedBox(height: 10),
-              Text(
-                'Learn • Play • Grow',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
