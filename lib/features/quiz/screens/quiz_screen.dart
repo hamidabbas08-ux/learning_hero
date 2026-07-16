@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../data/java_quiz.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -8,17 +9,13 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  int currentQuestion = 0;
   int selectedOption = -1;
-
-  final List<String> options = [
-    "Programming Language",
-    "Operating System",
-    "Database",
-    "Web Browser",
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final question = javaQuiz[currentQuestion];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Java Quiz"),
@@ -29,28 +26,28 @@ class _QuizScreenState extends State<QuizScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Question 1 of 5",
-              style: TextStyle(
+            Text(
+              "Question ${currentQuestion + 1} of ${javaQuiz.length}",
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              "What is Java?",
-              style: TextStyle(
+            Text(
+              question.question,
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 20),
-            ...List.generate(options.length, (index) {
+            ...List.generate(question.options.length, (index) {
               return Card(
                 child: RadioListTile<int>(
                   value: index,
                   groupValue: selectedOption,
-                  title: Text(options[index]),
+                  title: Text(question.options[index]),
                   onChanged: (value) {
                     setState(() {
                       selectedOption = value!;
@@ -63,8 +60,21 @@ class _QuizScreenState extends State<QuizScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
-                child: const Text("Next"),
+                onPressed: () {
+                  if (selectedOption == -1) return;
+
+                  if (currentQuestion < javaQuiz.length - 1) {
+                    setState(() {
+                      currentQuestion++;
+                      selectedOption = -1;
+                    });
+                  }
+                },
+                child: Text(
+                  currentQuestion == javaQuiz.length - 1
+                      ? "Finish"
+                      : "Next",
+                ),
               ),
             ),
           ],
